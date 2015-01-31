@@ -15,9 +15,9 @@ public class GameOver : MonoBehaviour {
 
 	void OnGUI() {
 		GUI.Label (new Rect (Screen.width / 2 - 30, 20, 200, 20), "Score " + PlayerPrefs.GetInt ("score").ToString ());
-		if (GUI.Button (new Rect (Screen.width / 2 - 40,70, 80, 20), "Retry?")) {
+		if (GUI.Button (new Rect (Screen.width / 2 - 40,70, 200, 60), "Retry?")) {
 			Application.LoadLevel(0);
-			SwipperController.objKilled = 0;
+			new ResetGame();
 		}
 	}
 }

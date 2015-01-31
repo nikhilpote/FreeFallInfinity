@@ -1,5 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+enum CharacterState {
+	NORMAL =0 ,
+	SLOW 
+
+};
+enum ParaChuteState {
+	CLOSE =0,
+	OPEN 
+}
 
 public class AccelController : MonoBehaviour {
 
@@ -7,10 +16,15 @@ public class AccelController : MonoBehaviour {
 	private float lastAccel;
 	public float speed = 0.01f;
 	public float movethreshold = 10.0f;
+	public GameObject parachuteModel;
 	private float iPx;
 	private Vector2 lastVelocity ;
+	private Animator characterAnimator;
+	private Animator parachuteAnimator;
 	void Start () {
 		lastAccel = Input.acceleration.x;
+		characterAnimator = gameObject.GetComponent<Animator> ();
+		parachuteAnimator = parachuteModel.GetComponent<Animator> ();
 	}
 	
 	// Update is called once per frame
@@ -57,15 +71,21 @@ public class AccelController : MonoBehaviour {
 			
 			
 			if (touch.phase == TouchPhase.Began) {
-				lastVelocity = rigidbody2D.velocity;
+				//lastVelocity = rigidbody2D.velocity;
 				rigidbody2D.drag = 5.0f;
-			}
-			if (touch.phase == TouchPhase.Moved) {
 
+
+				characterAnimator.SetInteger("characterState",(int)CharacterState.SLOW);
+				parachuteAnimator.SetInteger("parachuteopen",(int)ParaChuteState.OPEN);
+			}
+			if (touch.phase == TouchPhase.Stationary) {
+				//rigidbody.drag = rigidbody.drag+1;
 			}
 			if (touch.phase == TouchPhase.Ended) {
-				rigidbody2D.drag = 0.0f;
-				rigidbody2D.velocity = lastVelocity;
+				rigidbody2D.drag = 0.5f;
+				characterAnimator.SetInteger("characterState",(int)CharacterState.NORMAL);
+				parachuteAnimator.SetInteger("parachuteopen",(int)ParaChuteState.CLOSE);
+				//rigidbody2D.velocity = lastVelocity;
 			} 
 			
 		} 
@@ -73,9 +93,9 @@ public class AccelController : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D otherObject) {
 
-		PlayerPrefs.SetInt ("score", (int)SwipperController.objKilled);
+		PlayerPrefs.SetInt ("score", (int)ScoreManager.getScore());
 		Application.LoadLevel (1);
 
-		}
+	}
 
 }

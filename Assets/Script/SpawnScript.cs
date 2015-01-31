@@ -22,9 +22,9 @@ public class SpawnScript : MonoBehaviour {
 	void Spawn() {
 		if (ObjectCount < 21) {
 			if(ObjectCount == 0) {
-				lastObjectSpawned =  Instantiate (obj [Random.Range (0, obj.GetLength (0))], transform.position, Quaternion.identity)as GameObject;
+				lastObjectSpawned =  Instantiate (obj [Random.Range (0, obj.GetLength (0))], new Vector3( transform.position.x,transform.position.y,0), Quaternion.identity)as GameObject;
 			}else {
-				lastObjectSpawned =  Instantiate (obj [Random.Range (0, obj.GetLength (0))], new Vector3(transform.position.x, lastObjectSpawned.transform.position.y-tileheight,transform.position.z), Quaternion.identity)as GameObject;
+				lastObjectSpawned =  Instantiate (obj [Random.Range (0, obj.GetLength (0))], new Vector3(transform.position.x, lastObjectSpawned.transform.position.y-tileheight,0), Quaternion.identity)as GameObject;
 			}
 						ObjectCount++;
 				} else {
