@@ -15,7 +15,9 @@ public class SwipperController : MonoBehaviour {
 				}
 			
 		SpawnScript.ObjCount = SpawnScript.ObjCount - 1;
-		ScoreManager.increaseScore ();
+		if (otherObject.gameObject.tag == Constants.OBSTACLE) {
+			ScoreManager.increaseScore ();
+		}
 
 	}
 

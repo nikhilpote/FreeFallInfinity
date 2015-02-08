@@ -8,12 +8,15 @@ public class ScoreManager  {
 
 	public static void increaseScore() {
 		score += 1;
+		UIController.setScore (score);
 	}
 	public static void increaseScoreBy(int _score) {
 		score += _score;
+		UIController.setScore (score);
 	}
 	public static void resetScore() {
 		score = 0;
+		UIController.setScore (score);
 	}
 
 	public static int getScore() {

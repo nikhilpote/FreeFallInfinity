@@ -14,11 +14,4 @@ public class HUDControl : MonoBehaviour {
 		
 	}
 
-	void OnGUI()  {
-
-		GUI.Label (new Rect (10, 10, 80, 20), "Score " + ScoreManager.getScore().ToString ());
-
-	}
-
-
 }
