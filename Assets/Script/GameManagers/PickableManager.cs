@@ -30,17 +30,18 @@ namespace pickable {
 				if(dictPickablesCount.TryGetValue(item,out value)) {
 					value+=coinIncrementerValue;
 					dictPickablesCount[item] = value;
-					Debug.Log("Coin Collected"+value);
+					//Debug.Log("Coin Collected"+value);
 					UIController.setCoins(value);
 				}
 				break;
 			case Constants.COINDOUBLER:
 				coinIncrementerValue = 2;
-				pickableTimers[Constants.COINDOUBLER] = Constants.DEFAULT_POWER_UP_TIMER;
+				pickableTimers[Constants.COINDOUBLER] = UpdateManager.Instance.getCurrentValueforUpgrade(Constants.COINDOUBLER);
 				break;
 			case Constants.MAGNET :
-				pickableTimers[Constants.MAGNET] = Constants.DEFAULT_POWER_UP_TIMER;
-				Debug.Log("Inside collide Magnet");
+				Debug.Log("Magnet power is "+UpdateManager.Instance.getCurrentValueforUpgrade(Constants.MAGNET));
+				pickableTimers[Constants.MAGNET] = UpdateManager.Instance.getCurrentValueforUpgrade(Constants.MAGNET);
+				//Debug.Log("Inside collide Magnet");
 				break;
 			}
 		}

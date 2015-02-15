@@ -38,8 +38,9 @@ namespace Player {
 			isParachuteHealthZero = false;
 			isParachuteOpen = false;
 			parachutehealth = Panel_Parachute_health.GetComponent<Parachute_health> ();
+
 		}
-		
+
 		// Update is called once per frame
 		void Update () {
 			/*float accel = Input.acceleration.x;
@@ -109,9 +110,9 @@ namespace Player {
 				Collider2D [] colliders = Physics2D.OverlapCircleAll (transform.position, 5);
 				int i = 0;
 				while (i < colliders.Length) {
-					Debug.Log("Tag of the object "+colliders[i].gameObject.tag);
+					//Debug.Log("Tag of the object "+colliders[i].gameObject.tag);
 					if(colliders[i].gameObject.tag == Constants.COIN) {
-						Debug.Log("Inside sphere");
+						//Debug.Log("Inside sphere");
 						colliders[i].gameObject.SendMessage("AddDamage",gameObject);
 						
 					}
@@ -129,20 +130,20 @@ namespace Player {
 		}
 
 		void OnCollisionEnter2D(Collision2D otherObject) {
-			Debug.Log ("Other object tag is " + otherObject.gameObject.tag);
+			//Debug.Log ("Other object tag is " + otherObject.gameObject.tag);
 			playerCollisions.checkCollisions (otherObject.gameObject.tag);
 
 		}
 
 		void OnTriggerEnter2D(Collider2D collider) {
-			Debug.Log("Trigger Entered");
+			//Debug.Log("Trigger Entered");
 			playerCollisions.checkCollisions (collider.gameObject.tag);
 			Destroy (collider.gameObject);
 		}
 
 		void openParachute() {
 			if (!isParachuteOpen) {
-				rigidbody2D.drag = 5.0f;
+				rigidbody2D.drag = Constants.DEFAULT_SLOW_DRAG;
 				characterAnimator.SetInteger ("characterState", (int)CharacterState.SLOW);
 				parachuteAnimator.SetInteger ("parachuteopen", (int)ParaChuteState.OPEN);
 				isParachuteOpen = true;
@@ -151,10 +152,24 @@ namespace Player {
 
 		void closeParachute() {
 			if (isParachuteOpen) {
-				rigidbody2D.drag = 0.5f;
+				rigidbody2D.drag = getDragforCurrentScore();
 				characterAnimator.SetInteger ("characterState", (int)CharacterState.NORMAL);
 				parachuteAnimator.SetInteger ("parachuteopen", (int)ParaChuteState.CLOSE);
 				isParachuteOpen = false;
+			}
+		}
+
+		float getDragforCurrentScore() {
+			if (ScoreManager.getScore () <= 20.0f) {
+				return Constants.DEFAULT_FAST_DRAG;
+			} else 
+			if (ScoreManager.getScore () > 20.0f && ScoreManager.getScore () <= 50.0f) {
+				return Constants.DEFAULT_HARD_DRAG;
+			}else 
+			if (ScoreManager.getScore () > 50.0f && ScoreManager.getScore () <= 80.0f) {
+				return Constants.DEFAULT_HARDER_DRAG;
+			}else {
+				return Constants.DEFAULT_HARDEST_DRAG;
 			}
 		}
 
@@ -185,7 +200,7 @@ namespace Player {
 				pickableManager.incrementItemCountfor (objectTag);
 			} else 
 			if (listObstacleCollisionObject.Contains (objectTag)) {
-				PlayerPrefs.SetInt ("score", (int)ScoreManager.getScore());
+				UpdateManager.Instance.setPlayerPrefs(pickableManager);
 				Application.LoadLevel (1);
 			}
 		}

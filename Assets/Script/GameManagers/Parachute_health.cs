@@ -19,14 +19,14 @@ public class Parachute_health : MonoBehaviour {
 		if (this.healthBar.size <= 0) {
 			Player.AccelController.setHealthZero(true);
 		} else {
-			this.healthBar.size = this.healthBar.size - Constants.DEFAULT_PARACHUTE_SIZE_DELTA_DECREMENT;
+			this.healthBar.size = this.healthBar.size - UpdateManager.Instance.getCurrentValueforUpgrade(Constants.PARACHUTE_HEALTH_DECREMENT);
 		}
 	}
 
 	public  void incrementScrollSize() {
-		Debug.Log ("incrementScrollSize");
+		//Debug.Log ("incrementScrollSize");
 		if (this.healthBar.size <= 1.0f) {
-			this.healthBar.size = this.healthBar.size + Constants.DEFAULT_PARACHUTE_SIZE_DELTA_INCREMENT;
+			this.healthBar.size = this.healthBar.size + UpdateManager.Instance.getCurrentValueforUpgrade(Constants.PARACHUTE_HEALTH_INCREMENT);
 			Player.AccelController.setHealthZero(false);
 		}
 	}

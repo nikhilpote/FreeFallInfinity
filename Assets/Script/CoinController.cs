@@ -10,6 +10,6 @@ public class CoinController : MonoBehaviour {
 	}
 	void AddDamage(GameObject player)	{
 		transform.position = Vector3.MoveTowards (transform.position, player.transform.position, 10.0f * Time.deltaTime);
-		Debug.Log("This function was called from a script attached to GameObjectA");
+		//Debug.Log("This function was called from a script attached to GameObjectA");
 	} 
 }

@@ -9,35 +9,44 @@ public class SpawnScript : MonoBehaviour {
 	public GameObject player;
 	public float spawnmin = 1.0f;
 	public float spawnmax = 2.0f;
-	private static float ObjectCount;
+	private static int ObjectCount;
 	public float tileheight;
 	private GameObject lastObjectSpawned;
 	void Start () {
 		ObjectCount = 0;
+		Debug.Log("Spawn script called");
 
-		Spawn ();
 	}
 	
-
+	void Update() {
+		Spawn ();
+	}
 
 	void Spawn() {
+
 		if (ObjectCount < 21) {
-			Debug.Log("screen width is "+Screen.width);
+			Debug.Log ("Object Count is" + ObjectCount);
+			//Debug.Log("screen width is "+Screen.width);
 			if(ObjectCount == 0) {
-				lastObjectSpawned =  Instantiate (obj [Random.Range (0, obj.GetLength (0))], new Vector3(transform.position.x,transform.position.y,0), Quaternion.identity)as GameObject;
+				lastObjectSpawned =  Instantiate (obj [0], new Vector3(transform.position.x,transform.position.y,0), Quaternion.identity)as GameObject;
 			}else {
-				lastObjectSpawned =  Instantiate (obj [Random.Range (0, obj.GetLength (0))], new Vector3(transform.position.x, lastObjectSpawned.transform.position.y-tileheight,0), Quaternion.identity)as GameObject;
+				if(ScoreManager.getScore()<15) {
+					lastObjectSpawned =  Instantiate (obj [Random.Range (1, obj.GetLength (0)/2)], new Vector3(transform.position.x, lastObjectSpawned.transform.position.y-tileheight,0), Quaternion.identity)as GameObject;
+				}else {
+					lastObjectSpawned =  Instantiate (obj [Random.Range (obj.GetLength (0)/2, obj.GetLength (0))], new Vector3(transform.position.x, lastObjectSpawned.transform.position.y-tileheight,0), Quaternion.identity)as GameObject;
+				}
 			}
 				ObjectCount++;
 			spawnPickables (lastObjectSpawned);
+
 		} else {
-				Debug.Log("Working Fine"+ObjectCount);
+				//Debug.Log("Working Fine"+ObjectCount);
 		}
 
-		Invoke ("Spawn", Random.Range (spawnmin, spawnmax));
+
 	}
 
-	public static float ObjCount
+	public static int ObjCount
 	{ 
 		get { return ObjectCount; }
 		set { ObjectCount = value; }

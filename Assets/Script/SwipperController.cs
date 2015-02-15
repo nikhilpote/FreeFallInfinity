@@ -7,14 +7,18 @@ public class SwipperController : MonoBehaviour {
 
 	}
 	void OnTriggerEnter2D(Collider2D otherObject) {
+		string objectTag = otherObject.tag;
 		if (otherObject.gameObject.transform.parent) {
+						
 						Destroy (otherObject.gameObject.transform.parent.gameObject);
 				} else {
 						Destroy(otherObject.gameObject);
 
 				}
-			
-		SpawnScript.ObjCount = SpawnScript.ObjCount - 1;
+		if (objectTag == Constants.OBSTACLE) {
+			SpawnScript.ObjCount = SpawnScript.ObjCount - 1;
+		}
+		//Debug.Log ("Obj Count is" + SpawnScript.ObjCount);
 		if (otherObject.gameObject.tag == Constants.OBSTACLE) {
 			ScoreManager.increaseScore ();
 		}
