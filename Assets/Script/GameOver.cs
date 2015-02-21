@@ -27,7 +27,7 @@ public class GameOver : MonoBehaviour {
 			y=y+50;
 		}
 		if (GUI.Button (new Rect (Screen.width / 2 - 40,70, 200, 60), "Retry?")) {
-			Application.LoadLevel(0);
+			Application.LoadLevel("GameScene");
 			new ResetGame();
 		}
 	}

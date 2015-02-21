@@ -12,9 +12,9 @@ public class UIController : MonoBehaviour {
 	}
 
 	public static void setScore(int score) {
-		Texts [0].text = "Score:"+score.ToString ();
+		Texts [0].text = ""+score.ToString ();
 	}
 	public static void setCoins(int coins ) {
-		Texts [1].text = "Coins:" + coins.ToString ();
+		Texts [1].text = "" + coins.ToString ();
 	}
 }

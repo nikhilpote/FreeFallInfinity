@@ -201,7 +201,7 @@ namespace Player {
 			} else 
 			if (listObstacleCollisionObject.Contains (objectTag)) {
 				UpdateManager.Instance.setPlayerPrefs(pickableManager);
-				Application.LoadLevel (1);
+				Application.LoadLevel ("GameOver");
 			}
 		}
 	}
