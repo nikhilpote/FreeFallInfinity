@@ -46,8 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Gulshan\GUI\UI Scripts\GodController.cs" />
-     <Compile Include="Assets\Gulshan\GUI\UI Scripts\UIManager.cs" />
      <Compile Include="Assets\Script\AccelController.cs" />
      <Compile Include="Assets\Script\CameraController.cs" />
      <Compile Include="Assets\Script\CoinController.cs" />
@@ -68,6 +66,8 @@
      <Compile Include="Assets\Script\SpawnScript.cs" />
      <Compile Include="Assets\Script\SwipperController.cs" />
      <Compile Include="Assets\Script\UIController.cs" />
+     <Compile Include="Assets\UI Scripts\GodController.cs" />
+     <Compile Include="Assets\UI Scripts\UIManager.cs" />
      <None Include="Assets\Palm Trees\Shaders\WavingDoublePassNoCullBackface.shader" />
      <None Include="Assets\Script\JSONObject\readme.txt" />
      <None Include="Assets\CactusPack\Shaders\VertexBlend.shader" />

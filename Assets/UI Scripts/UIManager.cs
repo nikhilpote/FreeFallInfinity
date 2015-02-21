@@ -30,7 +30,6 @@ public class UIManager : MonoBehaviour
 		Application.LoadLevel("GameScene");
 	}
 
-
     public void loadUIMainMenu () {
     
         // Load prefab from resource folder and instantiate.
